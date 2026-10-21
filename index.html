@@ -3,190 +3,216 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Eco-Tracker - Pemantau Sampah Sekolah</title>
+  <title>Eco-Tracker — Smart Ecolife Platform</title>
   
   <!-- CSS Utama -->
   <link rel="stylesheet" href="style.css">
   
-  <!-- Font & Icon (Google Fonts & FontAwesome) -->
+  <!-- Font Google Premium & FontAwesome Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
-  <!-- CDN untuk Cetak PDF & Grafik (Siap Digunakan) -->
+  <!-- CDN html2pdf & Chart.js -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 
-  <!-- ==================== HEADER & NAVBAR ==================== -->
+  <!-- NAVBAR ESTETIK -->
   <header class="navbar-header">
     <div class="nav-container">
-      <a href="#beranda" class="logo">
-        <i class="fa-solid fa-leaf"></i> Eco-Tracker
+      <a href="#" class="logo" onclick="switchPage('beranda')">
+        <div class="logo-icon"><i class="fa-solid fa-leaf"></i></div>
+        <span>Eco-Tracker</span>
       </a>
       
       <!-- Navigasi Desktop -->
       <nav class="nav-desktop">
-        <a href="#beranda" class="nav-link active">Beranda</a>
-        <a href="#tracker" class="nav-link">Rencana Aksi</a>
-        <a href="#arsip" class="nav-link">Arsip Tahunan</a>
-        <a href="#about" class="nav-link">Tentang Pembuat</a>
+        <button class="nav-link active" onclick="switchPage('beranda')">Beranda</button>
+        <button class="nav-link" onclick="switchPage('tracker')">Rencana Aksi</button>
+        <button class="nav-link" onclick="switchPage('arsip')">Arsip Tahunan</button>
+        <button class="nav-link" onclick="switchPage('about')">Tentang Pembuat</button>
       </nav>
 
-      <!-- Tombol Hamburger (Mobile) -->
+      <!-- Tombol Mobile Hamburger -->
       <button class="hamburger-btn" id="hamburgerBtn" aria-label="Buka Menu">
-        <i class="fa-solid fa-bars"></i>
+        <i class="fa-solid fa-bars-staggered"></i>
       </button>
     </div>
 
-    <!-- Navigasi Mobile (Drawer Samping) -->
+    <!-- Mobile Drawer -->
     <div class="nav-mobile-drawer" id="mobileDrawer">
       <button class="close-btn" id="closeDrawerBtn">&times;</button>
-      <a href="#beranda" class="mobile-link">Beranda</a>
-      <a href="#tracker" class="mobile-link">Rencana Aksi</a>
-      <a href="#arsip" class="mobile-link">Arsip Tahunan</a>
-      <a href="#about" class="mobile-link">Tentang Pembuat</a>
+      <button class="mobile-link" onclick="switchPage('beranda')">Beranda</button>
+      <button class="mobile-link" onclick="switchPage('tracker')">Rencana Aksi</button>
+      <button class="mobile-link" onclick="switchPage('arsip')">Arsip Tahunan</button>
+      <button class="mobile-link" onclick="switchPage('about')">Tentang Pembuat</button>
     </div>
   </header>
 
-  <main>
-    <!-- ==================== SECTION 1: BERANDA ==================== -->
-    <section id="beranda" class="section hero-section">
-      <div class="container hero-content">
-        <div class="hero-text">
-          <span class="badge">Smart Ecolife Project</span>
-          <h1>Pantau & Kurangi Sampah Sekolah Kita</h1>
-          <p>Aplikasi pencatat volume sampah harian berbasis matematika dan teknologi digital untuk menciptakan lingkungan sekolah yang lebih bersih dan berkelanjutan.</p>
-          <div class="hero-buttons">
-            <a href="#tracker" class="btn btn-primary">Mulai Rencana Aksi <i class="fa-solid fa-arrow-right"></i></a>
-            <a href="#about" class="btn btn-outline">Pelajari Selengkapnya</a>
+  <main class="main-content">
+
+    <!-- ==================== PAGE 1: BERANDA ==================== -->
+    <section id="page-beranda" class="page-view active">
+      <div class="container">
+        <div class="hero-wrapper">
+          <div class="hero-badge"><i class="fa-solid fa-sparkles"></i> Platform Inovasi Smart Ecolife</div>
+          <h1 class="hero-title">Kelola & Analisis Dampak Sampah Sekolah Secara Digital</h1>
+          <p class="hero-subtitle">Platform analisis berbasis web untuk mencatat, mengukur, dan memproyeksikan efisiensi pengurangan sampah sekolah dengan metodologi berbasis data.</p>
+          
+          <div class="hero-actions">
+            <button class="btn btn-primary btn-glow" onclick="switchPage('tracker')">
+              Mulai Rencana Aksi <i class="fa-solid fa-arrow-right"></i>
+            </button>
+            <button class="btn btn-secondary" onclick="switchPage('about')">
+              Pelajari Pengembang
+            </button>
           </div>
         </div>
-        <div class="hero-card-info">
-          <div class="info-card">
-            <i class="fa-solid fa-calculator"></i>
-            <h3>Kalkulasi Otomatis</h3>
-            <p>Menghitung statistik perubahan volume sampah per paruh bulan secara presisi.</p>
+
+        <!-- Metric Highlight Cards -->
+        <div class="feature-grid">
+          <div class="feature-card">
+            <div class="feature-icon"><i class="fa-solid fa-chart-line"></i></div>
+            <h3>Perhitungan Otomatis</h3>
+            <p>Sistem membandingkan tren paruh pertama dan kedua untuk mendeteksi perubahan volume sampah.</p>
           </div>
-          <div class="info-card">
-            <i class="fa-solid fa-file-pdf"></i>
-            <h3>Ekspor Laporan PDF</h3>
-            <p>Cetak dan unduh rekapitulasi data harian siap tempel di mading sekolah.</p>
+          <div class="feature-card">
+            <div class="feature-icon"><i class="fa-solid fa-file-invoice"></i></div>
+            <h3>Arsip Laporan PDF</h3>
+            <p>Generate dokumen PDF resmi per bulan maupun per tahun yang tersimpan permanen di arsip.</p>
           </div>
-          <div class="info-card">
-            <i class="fa-solid fa-chart-line"></i>
-            <h3>Evaluasi Tahunan</h3>
-            <p>Simpan ringkasan 12 bulan untuk melihat grafik perkembangan keasrian sekolah.</p>
+          <div class="feature-card">
+            <div class="feature-icon"><i class="fa-solid fa-shield-halved"></i></div>
+            <h3>Penyimpanan Lokal</h3>
+            <p>Data tersimpan aman di browser Anda tanpa khawatir hilang saat halaman dimuat ulang.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ==================== SECTION 2: RENCANA AKSI (TRACKER) ==================== -->
-    <section id="tracker" class="section tracker-section">
+    <!-- ==================== PAGE 2: RENCANA AKSI (TRACKER) ==================== -->
+    <section id="page-tracker" class="page-view">
       <div class="container">
-        <div class="section-title">
+        <div class="page-header">
           <h2>Rencana Aksi Pemantauan Sampah</h2>
-          <p>Isi berat sampah harian (kg). Sistem akan otomatis menganalisis perbandingan antara Paruh Pertama dan Paruh Kedua.</p>
+          <p>Masukkan berat sampah harian (kg). Tekan <strong>Enter</strong> untuk berpindah ke baris berikutnya secara cepat.</p>
         </div>
 
-        <!-- Status Progres Pengisian -->
-        <div class="progress-card">
-          <div class="progress-info">
-            <span>Progres Pengisian Bulan Ini</span>
-            <span id="progressText">0 / 30 Hari</span>
+        <!-- Status Progress Card -->
+        <div class="glass-card progress-box">
+          <div class="progress-header">
+            <div>
+              <span class="progress-title">Progres Pengisian Bulan Ini</span>
+              <p class="progress-sub">Lengkapi 30 hari untuk membuka kalkulasi otomatis</p>
+            </div>
+            <span class="progress-count" id="progressText">0 / 30 Hari</span>
           </div>
-          <div class="progress-bar-bg">
-            <div class="progress-bar-fill" id="progressBarFill" style="width: 0%;"></div>
+          <div class="progress-track">
+            <div class="progress-fill" id="progressBarFill"></div>
           </div>
         </div>
 
-        <!-- Container Tabel Paruh Waktu -->
-        <div class="tracker-tables-grid">
+        <!-- Tables Layout Grid -->
+        <div class="tracker-grid">
           
-          <!-- PARUH PERTAMA (Hari 1 - 15) -->
-          <div class="table-card" id="cardParuh1">
-            <div class="table-header">
-              <h3><i class="fa-solid fa-calendar-day"></i> Paruh Pertama (Hari 1 - 15)</h3>
-              <span class="badge badge-active" id="badgeParuh1">Sedang Aktif</span>
+          <!-- Paruh Pertama -->
+          <div class="card-table-wrapper" id="cardParuh1">
+            <div class="card-table-header">
+              <div>
+                <h3><i class="fa-solid fa-1"></i> Paruh Pertama (Hari 1-15)</h3>
+                <span class="badge badge-active" id="badgeParuh1">Aktif</span>
+              </div>
+              <button class="btn-text-danger" onclick="resetParuh(1)">
+                <i class="fa-solid fa-rotate-left"></i> Reset Paruh 1
+              </button>
             </div>
-            <div class="table-responsive">
-              <table class="data-table">
+            <div class="table-scroll">
+              <table class="styled-table">
                 <thead>
                   <tr>
                     <th>Hari</th>
                     <th>Tanggal</th>
-                    <th>Berat Sampah (kg)</th>
+                    <th>Berat (kg)</th>
                   </tr>
                 </thead>
-                <tbody id="tbodyParuh1">
-                  <!-- Baris hari 1-15 akan di-generate via JavaScript -->
-                </tbody>
+                <tbody id="tbodyParuh1"></tbody>
               </table>
             </div>
           </div>
 
-          <!-- PARUH KEDUA (Hari 16 - 30/31) -->
-          <div class="table-card table-locked" id="cardParuh2">
-            <div class="table-header">
-              <h3><i class="fa-solid fa-calendar-days"></i> Paruh Kedua (Hari 16 - 30)</h3>
-              <span class="badge badge-locked" id="badgeParuh2">Terkunci</span>
+          <!-- Paruh Kedua -->
+          <div class="card-table-wrapper locked" id="cardParuh2">
+            <div class="card-table-header">
+              <div>
+                <h3><i class="fa-solid fa-2"></i> Paruh Kedua (Hari 16-30)</h3>
+                <span class="badge badge-locked" id="badgeParuh2">Terkunci</span>
+              </div>
+              <button class="btn-text-danger" onclick="resetParuh(2)">
+                <i class="fa-solid fa-rotate-left"></i> Reset Paruh 2
+              </button>
             </div>
-            <div class="table-responsive">
-              <table class="data-table">
+            <div class="table-scroll">
+              <table class="styled-table">
                 <thead>
                   <tr>
                     <th>Hari</th>
                     <th>Tanggal</th>
-                    <th>Berat Sampah (kg)</th>
+                    <th>Berat (kg)</th>
                   </tr>
                 </thead>
-                <tbody id="tbodyParuh2">
-                  <!-- Baris hari 16-30 akan di-generate via JavaScript -->
-                </tbody>
+                <tbody id="tbodyParuh2"></tbody>
               </table>
             </div>
           </div>
 
         </div>
 
-        <!-- Panel Aksi Hitung & Hasil Analysis -->
-        <div class="action-panel">
-          <button id="btnHitung" class="btn btn-success btn-lg" disabled>
-            <i class="fa-solid fa-chart-pie"></i> Hitung Perubahan Volume Sampah
+        <!-- Action Panel -->
+        <div class="action-bar">
+          <button id="btnHitung" class="btn btn-primary btn-lg" disabled onclick="calculateResult()">
+            <i class="fa-solid fa-calculator"></i> Hitung Perubahan Bulanan
+          </button>
+          <button class="btn btn-secondary" onclick="resetSemuaBulanIni()">
+            <i class="fa-solid fa-trash-arrow-up"></i> Reset Semua Input Bulan Ini
           </button>
         </div>
 
-        <!-- Kartu Hasil Analisis (Hidden awal) -->
-        <div id="resultCard" class="result-card hidden">
-          <div class="result-header">
-            <h3><i class="fa-solid fa-square-poll-vertical"></i> Hasil Analisis Bulanan</h3>
-            <span id="statusBadge" class="status-badge">Menunggu Data...</span>
+        <!-- Hasil Analisis -->
+        <div id="resultCard" class="glass-card result-panel hidden">
+          <div class="result-top">
+            <div>
+              <h3>Laporan Hasil Evaluasi Bulanan</h3>
+              <p>Analisis komparatif sampah sekolah paruh 1 vs paruh 2</p>
+            </div>
+            <span id="statusBadge" class="status-pill">--</span>
           </div>
-          <div class="result-grid">
-            <div class="result-box">
-              <small>Rata-rata Paruh 1</small>
+
+          <div class="metrics-grid">
+            <div class="metric-card">
+              <span>Rata-Rata Paruh 1</span>
               <h4 id="avgParuh1">0 kg/hari</h4>
             </div>
-            <div class="result-box">
-              <small>Rata-rata Paruh 2</small>
+            <div class="metric-card">
+              <span>Rata-Rata Paruh 2</span>
               <h4 id="avgParuh2">0 kg/hari</h4>
             </div>
-            <div class="result-box highlight">
-              <small>Persentase Perubahan</small>
+            <div class="metric-card highlight">
+              <span>Perubahan Volume</span>
               <h4 id="percentChange">0%</h4>
             </div>
           </div>
-          <p id="evalMessage" class="eval-message"></p>
-          
-          <div class="result-actions">
-            <button id="btnDownloadPDF" class="btn btn-outline">
-              <i class="fa-solid fa-file-pdf"></i> Unduh Laporan PDF / Gambar
+
+          <p id="evalMessage" class="eval-box"></p>
+
+          <div class="result-btn-group">
+            <button class="btn btn-outline" onclick="downloadCurrentMonthPDF()">
+              <i class="fa-solid fa-file-pdf"></i> Unduh PDF Bulan Ini
             </button>
-            <button id="btnSimpanKeArsip" class="btn btn-primary">
-              <i class="fa-solid fa-box-archive"></i> Simpan ke Arsip Tahunan
+            <button class="btn btn-primary" onclick="saveToYearlyArchive()">
+              <i class="fa-solid fa-box-archive"></i> Simpan Ke Arsip Tahunan
             </button>
           </div>
         </div>
@@ -194,46 +220,51 @@
       </div>
     </section>
 
-    <!-- ==================== SECTION 3: ARSIP TAHUNAN ==================== -->
-    <section id="arsip" class="section arsip-section">
+    <!-- ==================== PAGE 3: ARSIP TAHUNAN ==================== -->
+    <section id="page-arsip" class="page-view">
       <div class="container">
-        <div class="section-title">
+        <div class="page-header">
           <h2>Arsip & Rekapitulasi Tahunan</h2>
-          <p>Ringkasan akumulasi data volume sampah selama 12 bulan dalam 1 tahun ajaran.</p>
+          <p>Daftar histori laporan bulanan yang telah diselesaikan. Anda dapat melihat rata-rata dan mengunduh ulang PDF setiap bulan secara mandiri.</p>
         </div>
 
-        <div class="arsip-grid">
-          <!-- Area Grafik -->
-          <div class="chart-card">
-            <h3>Grafik Tren Sampah Bulanan</h3>
-            <div class="chart-wrapper">
+        <div class="arsip-layout">
+          <!-- Chart Card -->
+          <div class="glass-card chart-container">
+            <h3>Tren Sampah Bulanan (kg)</h3>
+            <div class="chart-box">
               <canvas id="yearlyChart"></canvas>
             </div>
           </div>
 
-          <!-- Tabel Ringkasan 12 Bulan -->
-          <div class="summary-card">
-            <h3>Rekapitulasi 12 Bulan</h3>
-            <div class="table-responsive">
-              <table class="data-table">
+          <!-- Table Arsip -->
+          <div class="glass-card table-arsip-container">
+            <div class="card-table-header">
+              <h3>Histori Data Bulanan</h3>
+              <button class="btn btn-danger btn-sm" onclick="resetYearlyData()">
+                <i class="fa-solid fa-trash-can"></i> Clear Arsip
+              </button>
+            </div>
+
+            <div class="table-scroll">
+              <table class="styled-table">
                 <thead>
                   <tr>
                     <th>Bulan</th>
+                    <th>Rata-rata Paruh 1</th>
+                    <th>Rata-rata Paruh 2</th>
                     <th>Total (kg)</th>
                     <th>Status</th>
+                    <th>Aksi Laporan</th>
                   </tr>
                 </thead>
-                <tbody id="tbodyArsipTahunan">
-                  <!-- Data 12 Bulan akan dirender dari JS -->
-                </tbody>
+                <tbody id="tbodyArsipTahunan"></tbody>
               </table>
             </div>
-            <div class="arsip-actions">
-              <button id="btnDownloadYearlyPDF" class="btn btn-outline btn-sm">
-                <i class="fa-solid fa-download"></i> Unduh Laporan Tahunan (.PDF)
-              </button>
-              <button id="btnResetTahunan" class="btn btn-danger btn-sm">
-                <i class="fa-solid fa-trash-can"></i> Reset Data Tahunan
+
+            <div style="margin-top:20px; text-align:right;">
+              <button class="btn btn-outline" onclick="downloadYearlyPDF()">
+                <i class="fa-solid fa-file-pdf"></i> Unduh Laporan Rekap Tahunan (.PDF)
               </button>
             </div>
           </div>
@@ -242,50 +273,54 @@
       </div>
     </section>
 
-    <!-- ==================== SECTION 4: TENTANG PEMBUAT ==================== -->
-    <section id="about" class="section about-section">
+    <!-- ==================== PAGE 4: TENTANG PEMBUAT ==================== -->
+    <section id="page-about" class="page-view">
       <div class="container">
-        <div class="about-card">
-          <div class="about-header">
-            <div class="avatar-icon">
-              <i class="fa-solid fa-user-gear"></i>
-            </div>
+        <div class="glass-card about-box">
+          <div class="about-profile">
+            <div class="profile-avatar"><i class="fa-solid fa-code"></i></div>
             <div>
-              <h2>Tentang Pembuat Aplikasi</h2>
-              <p>Pengembang Solusi Digital Ecolife Sekolah</p>
+              <h2>Pengembang Aplikasi</h2>
+              <p>Informatika & Matematika — Projek Smart Ecolife</p>
             </div>
           </div>
-          <div class="about-body">
-            <p>Aplikasi <strong>Eco-Tracker</strong> ini dirancang dan dikembangkan sebagai projek integrasi antarmata pelajaran <strong>Informatika</strong> (Algoritma & Pemrograman) dan <strong>Matematika</strong> (Baris & Deret/Statistika).</p>
+
+          <div class="about-content">
+            <p>Aplikasi <strong>Eco-Tracker</strong> dirancang untuk membantu transparansi dan efisiensi pengelolaan sampah sekolah. Aplikasi ini menggabungkan prinsip algoritma pemrograman web modern serta pemodelan statistik matematika dasar.</p>
             
-            <div class="about-details">
-              <div class="detail-item">
-                <strong><i class="fa-solid fa-code"></i> Pengembang:</strong>
-                <span>Siswa / Developer Pemula</span>
+            <div class="info-list">
+              <div class="info-item">
+                <i class="fa-solid fa-laptop-code"></i>
+                <div>
+                  <strong>Teknologi Frontend:</strong>
+                  <span>HTML5, CSS3 Custom Properties, JavaScript ES6+, html2pdf.js, & Chart.js</span>
+                </div>
               </div>
-              <div class="detail-item">
-                <strong><i class="fa-solid fa-graduation-cap"></i> Kelas / Tingkat:</strong>
-                <span>Kelas XI - Smart Ecolife</span>
-              </div>
-              <div class="detail-item">
-                <strong><i class="fa-solid fa-bullseye"></i> Tujuan Projek:</strong>
-                <span>Membantu sekolah dalam pengelolaan & efisiensi penanganan sampah harian secara terukur.</span>
+              <div class="info-item">
+                <i class="fa-solid fa-layer-group"></i>
+                <div>
+                  <strong>Arsitektur Data:</strong>
+                  <span>Multi-Page Client Single Page App (SPA) dengan LocalStorage Persistence & Dynamic PDF Renderer</span>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </section>
+
   </main>
 
-  <!-- ==================== FOOTER ==================== -->
-  <footer class="main-footer">
-    <div class="container footer-content">
-      <p>&copy; 2026 Eco-Tracker Sekolah. Dipersembahkan untuk Lingkungan Sekolah Sehat.</p>
+  <!-- TEMPLATE HIDDEN UNTUK CETAK PDF MURNI & ELEGAN -->
+  <div id="pdfExportContainer" class="pdf-export-hidden"></div>
+
+  <!-- FOOTER -->
+  <footer class="footer-bar">
+    <div class="container">
+      <p>&copy; 2026 Eco-Tracker Platform. Eco-Digital Architecture Project.</p>
     </div>
   </footer>
 
-  <!-- File JavaScript Utama -->
   <script src="script.js"></script>
 </body>
 </html>
