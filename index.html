@@ -1,1 +1,291 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eco-Tracker - Pemantau Sampah Sekolah</title>
+  
+  <!-- CSS Utama -->
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- Font & Icon (Google Fonts & FontAwesome) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- CDN untuk Cetak PDF & Grafik (Siap Digunakan) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
 
+  <!-- ==================== HEADER & NAVBAR ==================== -->
+  <header class="navbar-header">
+    <div class="nav-container">
+      <a href="#beranda" class="logo">
+        <i class="fa-solid fa-leaf"></i> Eco-Tracker
+      </a>
+      
+      <!-- Navigasi Desktop -->
+      <nav class="nav-desktop">
+        <a href="#beranda" class="nav-link active">Beranda</a>
+        <a href="#tracker" class="nav-link">Rencana Aksi</a>
+        <a href="#arsip" class="nav-link">Arsip Tahunan</a>
+        <a href="#about" class="nav-link">Tentang Pembuat</a>
+      </nav>
+
+      <!-- Tombol Hamburger (Mobile) -->
+      <button class="hamburger-btn" id="hamburgerBtn" aria-label="Buka Menu">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+
+    <!-- Navigasi Mobile (Drawer Samping) -->
+    <div class="nav-mobile-drawer" id="mobileDrawer">
+      <button class="close-btn" id="closeDrawerBtn">&times;</button>
+      <a href="#beranda" class="mobile-link">Beranda</a>
+      <a href="#tracker" class="mobile-link">Rencana Aksi</a>
+      <a href="#arsip" class="mobile-link">Arsip Tahunan</a>
+      <a href="#about" class="mobile-link">Tentang Pembuat</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- ==================== SECTION 1: BERANDA ==================== -->
+    <section id="beranda" class="section hero-section">
+      <div class="container hero-content">
+        <div class="hero-text">
+          <span class="badge">Smart Ecolife Project</span>
+          <h1>Pantau & Kurangi Sampah Sekolah Kita</h1>
+          <p>Aplikasi pencatat volume sampah harian berbasis matematika dan teknologi digital untuk menciptakan lingkungan sekolah yang lebih bersih dan berkelanjutan.</p>
+          <div class="hero-buttons">
+            <a href="#tracker" class="btn btn-primary">Mulai Rencana Aksi <i class="fa-solid fa-arrow-right"></i></a>
+            <a href="#about" class="btn btn-outline">Pelajari Selengkapnya</a>
+          </div>
+        </div>
+        <div class="hero-card-info">
+          <div class="info-card">
+            <i class="fa-solid fa-calculator"></i>
+            <h3>Kalkulasi Otomatis</h3>
+            <p>Menghitung statistik perubahan volume sampah per paruh bulan secara presisi.</p>
+          </div>
+          <div class="info-card">
+            <i class="fa-solid fa-file-pdf"></i>
+            <h3>Ekspor Laporan PDF</h3>
+            <p>Cetak dan unduh rekapitulasi data harian siap tempel di mading sekolah.</p>
+          </div>
+          <div class="info-card">
+            <i class="fa-solid fa-chart-line"></i>
+            <h3>Evaluasi Tahunan</h3>
+            <p>Simpan ringkasan 12 bulan untuk melihat grafik perkembangan keasrian sekolah.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SECTION 2: RENCANA AKSI (TRACKER) ==================== -->
+    <section id="tracker" class="section tracker-section">
+      <div class="container">
+        <div class="section-title">
+          <h2>Rencana Aksi Pemantauan Sampah</h2>
+          <p>Isi berat sampah harian (kg). Sistem akan otomatis menganalisis perbandingan antara Paruh Pertama dan Paruh Kedua.</p>
+        </div>
+
+        <!-- Status Progres Pengisian -->
+        <div class="progress-card">
+          <div class="progress-info">
+            <span>Progres Pengisian Bulan Ini</span>
+            <span id="progressText">0 / 30 Hari</span>
+          </div>
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" id="progressBarFill" style="width: 0%;"></div>
+          </div>
+        </div>
+
+        <!-- Container Tabel Paruh Waktu -->
+        <div class="tracker-tables-grid">
+          
+          <!-- PARUH PERTAMA (Hari 1 - 15) -->
+          <div class="table-card" id="cardParuh1">
+            <div class="table-header">
+              <h3><i class="fa-solid fa-calendar-day"></i> Paruh Pertama (Hari 1 - 15)</h3>
+              <span class="badge badge-active" id="badgeParuh1">Sedang Aktif</span>
+            </div>
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Hari</th>
+                    <th>Tanggal</th>
+                    <th>Berat Sampah (kg)</th>
+                  </tr>
+                </thead>
+                <tbody id="tbodyParuh1">
+                  <!-- Baris hari 1-15 akan di-generate via JavaScript -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- PARUH KEDUA (Hari 16 - 30/31) -->
+          <div class="table-card table-locked" id="cardParuh2">
+            <div class="table-header">
+              <h3><i class="fa-solid fa-calendar-days"></i> Paruh Kedua (Hari 16 - 30)</h3>
+              <span class="badge badge-locked" id="badgeParuh2">Terkunci</span>
+            </div>
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Hari</th>
+                    <th>Tanggal</th>
+                    <th>Berat Sampah (kg)</th>
+                  </tr>
+                </thead>
+                <tbody id="tbodyParuh2">
+                  <!-- Baris hari 16-30 akan di-generate via JavaScript -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Panel Aksi Hitung & Hasil Analysis -->
+        <div class="action-panel">
+          <button id="btnHitung" class="btn btn-success btn-lg" disabled>
+            <i class="fa-solid fa-chart-pie"></i> Hitung Perubahan Volume Sampah
+          </button>
+        </div>
+
+        <!-- Kartu Hasil Analisis (Hidden awal) -->
+        <div id="resultCard" class="result-card hidden">
+          <div class="result-header">
+            <h3><i class="fa-solid fa-square-poll-vertical"></i> Hasil Analisis Bulanan</h3>
+            <span id="statusBadge" class="status-badge">Menunggu Data...</span>
+          </div>
+          <div class="result-grid">
+            <div class="result-box">
+              <small>Rata-rata Paruh 1</small>
+              <h4 id="avgParuh1">0 kg/hari</h4>
+            </div>
+            <div class="result-box">
+              <small>Rata-rata Paruh 2</small>
+              <h4 id="avgParuh2">0 kg/hari</h4>
+            </div>
+            <div class="result-box highlight">
+              <small>Persentase Perubahan</small>
+              <h4 id="percentChange">0%</h4>
+            </div>
+          </div>
+          <p id="evalMessage" class="eval-message"></p>
+          
+          <div class="result-actions">
+            <button id="btnDownloadPDF" class="btn btn-outline">
+              <i class="fa-solid fa-file-pdf"></i> Unduh Laporan PDF / Gambar
+            </button>
+            <button id="btnSimpanKeArsip" class="btn btn-primary">
+              <i class="fa-solid fa-box-archive"></i> Simpan ke Arsip Tahunan
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================== SECTION 3: ARSIP TAHUNAN ==================== -->
+    <section id="arsip" class="section arsip-section">
+      <div class="container">
+        <div class="section-title">
+          <h2>Arsip & Rekapitulasi Tahunan</h2>
+          <p>Ringkasan akumulasi data volume sampah selama 12 bulan dalam 1 tahun ajaran.</p>
+        </div>
+
+        <div class="arsip-grid">
+          <!-- Area Grafik -->
+          <div class="chart-card">
+            <h3>Grafik Tren Sampah Bulanan</h3>
+            <div class="chart-wrapper">
+              <canvas id="yearlyChart"></canvas>
+            </div>
+          </div>
+
+          <!-- Tabel Ringkasan 12 Bulan -->
+          <div class="summary-card">
+            <h3>Rekapitulasi 12 Bulan</h3>
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Bulan</th>
+                    <th>Total (kg)</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="tbodyArsipTahunan">
+                  <!-- Data 12 Bulan akan dirender dari JS -->
+                </tbody>
+              </table>
+            </div>
+            <div class="arsip-actions">
+              <button id="btnDownloadYearlyPDF" class="btn btn-outline btn-sm">
+                <i class="fa-solid fa-download"></i> Unduh Laporan Tahunan (.PDF)
+              </button>
+              <button id="btnResetTahunan" class="btn btn-danger btn-sm">
+                <i class="fa-solid fa-trash-can"></i> Reset Data Tahunan
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================== SECTION 4: TENTANG PEMBUAT ==================== -->
+    <section id="about" class="section about-section">
+      <div class="container">
+        <div class="about-card">
+          <div class="about-header">
+            <div class="avatar-icon">
+              <i class="fa-solid fa-user-gear"></i>
+            </div>
+            <div>
+              <h2>Tentang Pembuat Aplikasi</h2>
+              <p>Pengembang Solusi Digital Ecolife Sekolah</p>
+            </div>
+          </div>
+          <div class="about-body">
+            <p>Aplikasi <strong>Eco-Tracker</strong> ini dirancang dan dikembangkan sebagai projek integrasi antarmata pelajaran <strong>Informatika</strong> (Algoritma & Pemrograman) dan <strong>Matematika</strong> (Baris & Deret/Statistika).</p>
+            
+            <div class="about-details">
+              <div class="detail-item">
+                <strong><i class="fa-solid fa-code"></i> Pengembang:</strong>
+                <span>Siswa / Developer Pemula</span>
+              </div>
+              <div class="detail-item">
+                <strong><i class="fa-solid fa-graduation-cap"></i> Kelas / Tingkat:</strong>
+                <span>Kelas XI - Smart Ecolife</span>
+              </div>
+              <div class="detail-item">
+                <strong><i class="fa-solid fa-bullseye"></i> Tujuan Projek:</strong>
+                <span>Membantu sekolah dalam pengelolaan & efisiensi penanganan sampah harian secara terukur.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="main-footer">
+    <div class="container footer-content">
+      <p>&copy; 2026 Eco-Tracker Sekolah. Dipersembahkan untuk Lingkungan Sekolah Sehat.</p>
+    </div>
+  </footer>
+
+  <!-- File JavaScript Utama -->
+  <script src="script.js"></script>
+</body>
+</html>
